@@ -22,6 +22,10 @@ public class Graph {
         this.numbOfEdges = numbOfEdges;
     }
 
+    public double[] getNodes(){
+        return nodes;
+    }
+
     public int getNumbOfNodes(){
         return numbOfNodes;
     }
