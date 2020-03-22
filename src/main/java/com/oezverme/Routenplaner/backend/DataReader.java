@@ -1,7 +1,6 @@
-package com.oezverme.routenplaner.backend;
+package com.oezverme.Routenplaner.backend;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class DataReader {
@@ -58,7 +57,7 @@ public class DataReader {
             nodes[i + 1] = Double.parseDouble(splittedLine[3]);
         }
     }
-^^
+
     /**
      *
      * @param br

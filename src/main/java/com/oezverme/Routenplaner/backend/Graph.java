@@ -1,4 +1,4 @@
-package com.oezverme.routenplaner.backend;
+package com.oezverme.Routenplaner.backend;
 
 public class Graph {
     // i is the nodeID; i*2: latitude of the node i; i*2+1: longitude of the node i;
@@ -10,16 +10,24 @@ public class Graph {
     // i: offset of the edges for node i
     private static int[] offset;
 
-    private static int amountOfNodes;
-    private static int amountOfEdges;
+    private static int numbOfNodes;
+    private static int numbOfEdges;
 
-    public Graph(double[] nodes, int[] edges, int[] costs, int[] offset, int amountOfNodes, int amountOfEdges) {
+    public Graph(double[] nodes, int[] edges, int[] costs, int[] offset, int numbOfNodes, int numbOfEdges) {
         this.nodes = nodes;
         this.edges = edges;
         this.costs = costs;
         this.offset = offset;
-        this.amountOfNodes = amountOfNodes;
-        this.amountOfEdges = amountOfEdges;
+        this.numbOfNodes = numbOfNodes;
+        this.numbOfEdges = numbOfEdges;
+    }
+
+    public int getNumbOfNodes(){
+        return numbOfNodes;
+    }
+
+    public int[] getCosts(){
+        return costs;
     }
 
     /**
@@ -32,12 +40,13 @@ public class Graph {
     }
 
     /**
-     * Returns the cost to use an edge
-     * @param edge ID of edge
-     * @return cost of an egde
+     *
+     * @param nodeA startpoint of the edge
+     * @param i number of the edge of nodeA
+     * @return
      */
-    public int getCost(int edge) {
-        return this.costs[edge];
+    public int getCostOfEdge(int nodeA, int i) {
+        return this.costs[getOffset(nodeA) + i];
     }
 
     /**
@@ -45,9 +54,9 @@ public class Graph {
      * @param node ID of node
      * @return number of connected edges of node
      */
-    public int getNumbOfEdges(int node) {
-        if (node == amountOfNodes - 1)
-            return amountOfEdges - offset[node];
+    public int getNumbOfEdgesOfNode(int node) {
+        if (node == numbOfNodes - 1)
+            return numbOfEdges - offset[node];
         return offset[node + 1] - offset[node];
     }
 
@@ -56,9 +65,9 @@ public class Graph {
      * @param nodeA source
      * @return all ID's of connected node targets with nodeA
      */
-    public int[] getEdges(int nodeA) {
-        if (getNumbOfEdges(nodeA) > 0) {
-            int[] nodeB = new int[getNumbOfEdges(nodeA)];
+    public int[] getEdgesOfNode(int nodeA) {
+        if (getNumbOfEdgesOfNode(nodeA) > 0) {
+            int[] nodeB = new int[getNumbOfEdgesOfNode(nodeA)];
             for (int i = 0; i < nodeB.length; i++) {
                 nodeB[i] = edges[offset[nodeA] + i];
             }
